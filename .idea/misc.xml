@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/drawable/background_image.xml" value="0.1" />
+        <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/drawable/background_input.xml" value="0.1" />
         <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/layout/activity_sign_in.xml" value="0.13360507246376813" />
+        <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/layout/activity_sign_up.xml" value="0.13360507246376813" />
         <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/layout/fragment_messages.xml" value="0.22826086956521738" />
         <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/layout/fragment_parametres.xml" value="0.22826086956521738" />
+        <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/layout/fragment_private.xml" value="0.25416666666666665" />
+        <entry key="..\:/Sauvegarde du PC/Ecole/Limerick/Mobile app dev/mobile-app-development-french-guys/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
