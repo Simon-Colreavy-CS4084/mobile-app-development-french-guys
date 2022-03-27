@@ -147,6 +147,7 @@ public class MessagesFragment extends Fragment implements ConversionListener {
                     chatMessage.message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
                     chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
                     conversations.add(chatMessage);
+
                 }
                 else if (documentChange.getType() == DocumentChange.Type.MODIFIED)
                 {

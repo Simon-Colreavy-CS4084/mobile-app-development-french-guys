@@ -3,6 +3,7 @@ package ie.ul.makevent.adapters;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,6 +16,8 @@ import ie.ul.makevent.databinding.ItemContainerRecentConversionBinding;
 import ie.ul.makevent.listeners.ConversionListener;
 import ie.ul.makevent.models.ChatMessage;
 import ie.ul.makevent.models.User;
+import ie.ul.makevent.utilities.Constants;
+import ie.ul.makevent.utilities.PreferenceManager;
 
 public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConversationsAdapter.ConversionViewHolder> {
 
@@ -52,17 +55,33 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
     class ConversionViewHolder extends RecyclerView.ViewHolder{
 
         ItemContainerRecentConversionBinding binding;
+        private PreferenceManager preferenceManager;
+
 
         ConversionViewHolder(ItemContainerRecentConversionBinding itemContainerRecentConversionBinding)
         {
             super(itemContainerRecentConversionBinding.getRoot());
             binding = itemContainerRecentConversionBinding;
+            preferenceManager = new PreferenceManager(binding.getRoot().getContext());
+
+
         }
 
         void setData(ChatMessage chatMessage)
         {
             binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
             binding.textName.setText(chatMessage.conversionName);
+            String lastMessage;
+            if (chatMessage.conversionId.equals(preferenceManager.getString(Constants.KEY_USER_ID)))
+            {
+                lastMessage = "You";
+            }
+            else
+            {
+                lastMessage = chatMessage.conversionName;
+            }
+            //Log.e("setData", chatMessage.message + " - sender : " + chatMessage.senderId + " receiver : " + chatMessage.receiverId + "\nuser : "  + preferenceManager.getString(Constants.KEY_USER_ID));
+            lastMessage += " : " + chatMessage.message;
             binding.textRecentMessage.setText(chatMessage.message);
             binding.getRoot().setOnClickListener(v -> {
                 User user = new User();

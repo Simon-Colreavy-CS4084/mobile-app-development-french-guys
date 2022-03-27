@@ -1,6 +1,5 @@
 package ie.ul.makevent.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,7 +31,7 @@ import ie.ul.makevent.models.User;
 import ie.ul.makevent.utilities.Constants;
 import ie.ul.makevent.utilities.PreferenceManager;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends BaseActivity {
 
     private ActivityChatBinding binding;
     private User receiverUser;
