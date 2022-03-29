@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "495626458529",
+    "project_id": "make-event-4955b",
+    "storage_bucket": "make-event-4955b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495626458529:android:cabdb607d25fbf43dc27e0",
+        "android_client_info": {
+          "package_name": "ie.ul.makevent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495626458529-lpoqju8tehk8cv547cc4sp9ls7ni5dp3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDya-E96YkFvi5NEMrn3AONUHNPSdsSfVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495626458529-lpoqju8tehk8cv547cc4sp9ls7ni5dp3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
