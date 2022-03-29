@@ -1,5 +1,6 @@
 package ie.ul.makevent;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import ie.ul.makevent.activities.ChatActivity;
+import ie.ul.makevent.utilities.Constants;
 
-public class Events extends Fragment  {
+
+public class Private extends Fragment  {
 
     private View view;
 
@@ -29,7 +33,8 @@ public class Events extends Fragment  {
 
     private void onClickButton() {
         Toast.makeText(getContext(),"Ceci",Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent(getContext(), Public.class);
+        startActivity(intent);
     }
 
 }

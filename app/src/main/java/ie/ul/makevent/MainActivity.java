@@ -3,21 +3,11 @@ package ie.ul.makevent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import ie.ul.makevent.databinding.ActivityMainBinding;
-import ie.ul.makevent.utilities.Constants;
-import ie.ul.makevent.utilities.PreferenceManager;
 
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         vpAdapter.addFragment(new MessagesFragment(), "Messages");
-        vpAdapter.addFragment(new Events(), "Events");
+        vpAdapter.addFragment(new Private(), "Events");
         vpAdapter.addFragment(new Parametres(), "Parametres");
 
         Messages mes = new Messages();

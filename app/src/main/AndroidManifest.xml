@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MakEvent">
         <activity
+            android:name=".Public"
+            android:exported="false" />
+        <activity
             android:name=".activities.ChatActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.UsersActivity"
             android:exported="false" />
