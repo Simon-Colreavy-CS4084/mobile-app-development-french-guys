@@ -11,21 +11,25 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-public class Events extends Fragment implements View.OnClickListener {
+public class Events extends Fragment  {
 
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        Button buttonEvents = getView().findViewById(R.id.buttonEvents);
-        buttonEvents.setOnClickListener(this);
+        view = inflater.inflate(R.layout.fragment_events , container, false);
+
+        Button buttonEvents = view.findViewById(R.id.buttonEvents);
+        buttonEvents.setOnClickListener(v -> onClickButton());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_events, container, false);
+        return view;
     }
 
-    @Override
-    public void onClick(View view) {
+    private void onClickButton() {
         Toast.makeText(getContext(),"Ceci",Toast.LENGTH_SHORT).show();
+
     }
+
 }
