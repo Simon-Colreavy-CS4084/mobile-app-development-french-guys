@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 
 
-public class Private extends Fragment {
+public class Events extends Fragment {
 
 
     @Override

@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         vpAdapter.addFragment(new MessagesFragment(), "Messages");
-        vpAdapter.addFragment(new Public(), "Public");
-        vpAdapter.addFragment(new Private(), "Private");
+        vpAdapter.addFragment(new Events(), "Events");
         vpAdapter.addFragment(new Parametres(), "Parametres");
 
         Messages mes = new Messages();

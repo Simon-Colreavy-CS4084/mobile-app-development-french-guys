@@ -31,7 +31,7 @@ public class Messages extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
@@ -65,7 +65,7 @@ public class Messages extends AppCompatActivity {
             Log.e("Messages", "text = null");
         }
 
-        text.setText(preferenceManager.getString(Constants.Key_NAME));
+        text.setText(preferenceManager.getString(Constants.KEY_NAME));
         byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         ((RoundedImageView) findViewById(R.id.imageProfile)).setImageBitmap(bitmap);

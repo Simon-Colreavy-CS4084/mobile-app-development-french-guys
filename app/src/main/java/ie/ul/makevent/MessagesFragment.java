@@ -94,7 +94,7 @@ public class MessagesFragment extends Fragment implements ConversionListener {
             Log.e("Messages", "text = null");
         }
 
-        text.setText(preferenceManager.getString(Constants.Key_NAME));
+        text.setText(preferenceManager.getString(Constants.KEY_NAME));
         byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         ((RoundedImageView) view.findViewById(R.id.imageProfile)).setImageBitmap(bitmap);

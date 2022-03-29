@@ -59,10 +59,8 @@ public class VPAdapter extends FragmentStateAdapter {
             case 1:
                 return new MessagesFragment();
             case 2:
-                return new Public();
+                return new Events();
             case 3:
-                return new Private();
-            case 4:
                 return new Parametres();
         }
         return null;
