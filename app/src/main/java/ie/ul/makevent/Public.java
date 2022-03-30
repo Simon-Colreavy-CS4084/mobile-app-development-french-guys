@@ -1,22 +1,25 @@
 package ie.ul.makevent;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.hardware.lights.LightState;
 import android.os.Bundle;
+import android.widget.ListView;
 
-import androidx.fragment.app.Fragment;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import ie.ul.makevent.adapters.HighTechEventAdapter;
+import ie.ul.makevent.databinding.ActivityPublicBinding;
+import ie.ul.makevent.models.HighTechEvent;
 
-
-public class Public extends Fragment {
-
-
-
+public class Public extends AppCompatActivity {
+    private ActivityPublicBinding binding;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_public, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //binding = ActivityPublicBinding.inflate(getLayoutInflater());
+        //setContentView(R.layout.activity_public);
+        //binding.imageBackEvents.setOnClickListener(v -> onBackPressed());
     }
 }
