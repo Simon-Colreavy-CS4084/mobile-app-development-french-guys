@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class Profile extends Fragment {
+public class Profile extends Fragment
+{
 
 
     @Override
