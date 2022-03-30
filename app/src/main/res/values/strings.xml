@@ -14,4 +14,10 @@
     <string name="sign_up">Sign Up</string>
     <string name="select_user">Select User</string>
     <string name="type_a_message">Type a message</string>
+    <string name="item_default_name">Name of event</string>
+    <string name="item_default_date">DD/MM/YY</string>
+    <string name="item_default_hour">HH:MM</string>
+    <string name="item_default_location">Location</string>
+    <string name="item_default_theme">Theme</string>
+    <string name="item_default_nb_participant">Nb of participant</string>
 </resources>
