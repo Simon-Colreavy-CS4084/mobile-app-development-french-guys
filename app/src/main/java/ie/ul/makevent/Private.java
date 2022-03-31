@@ -37,7 +37,7 @@ public class Private extends Fragment  {
     private View view;
     private FirebaseFirestore database;
     List<HighTechEvent> myEvents = new ArrayList<>();
-
+    HighTechEventAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -56,7 +56,8 @@ public class Private extends Fragment  {
         // Get list view
         listenEvent();
         ListView eventsListView = view.findViewById(R.id.events_list_view);
-        eventsListView.setAdapter(new HighTechEventAdapter(getContext(),myEvents));
+        adapter = new HighTechEventAdapter(getContext(),myEvents);
+        eventsListView.setAdapter(adapter);
 
 
         return view;
@@ -104,6 +105,15 @@ public class Private extends Fragment  {
 
                     myEvents.add(event);
                 }
+            }
+            if (myEvents.size() == 0)
+            {
+                adapter.notifyDataSetChanged();
+            }
+            else
+            {
+                //adapter.notifyItemRangeInserted(chatMessages.size(), chatMessages.size());
+                //binding.chatRecyclerView.smoothScrollToPosition(chatMessages.size() - 1);
             }
         }
     };
