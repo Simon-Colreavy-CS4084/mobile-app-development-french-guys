@@ -51,6 +51,7 @@ public class AddEventActivity extends AppCompatActivity {
         event.put(Constants.KEY_EVENT_LOCATION, edt_location);
         event.put(Constants.KEY_EVENT_THEME, edt_theme);
         event.put(Constants.KEY_EVENT_NB_PARTICIPANT, edt_nb_participant);
+        // rajouter son id dans la liste des partcipants
 
 
         binding.getRoot();

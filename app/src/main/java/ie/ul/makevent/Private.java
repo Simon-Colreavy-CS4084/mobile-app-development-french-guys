@@ -29,7 +29,7 @@ import ie.ul.makevent.adapters.HighTechEventAdapter;
 import ie.ul.makevent.models.ChatMessage;
 import ie.ul.makevent.models.HighTechEvent;
 import ie.ul.makevent.utilities.Constants;
-
+import ie.ul.makevent.utilities.PreferenceManager;
 
 
 public class Private extends Fragment  {
@@ -38,6 +38,8 @@ public class Private extends Fragment  {
     private FirebaseFirestore database;
     List<HighTechEvent> myEvents = new ArrayList<>();
     HighTechEventAdapter adapter;
+    private PreferenceManager preferenceManager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -49,6 +51,7 @@ public class Private extends Fragment  {
 
         //database
         database = FirebaseFirestore.getInstance();
+        preferenceManager = new PreferenceManager(getContext());
 
         //List of events
 
@@ -92,10 +95,17 @@ public class Private extends Fragment  {
             return;
         }
         if (value != null) {
+            int count = myEvents.size();
             for (DocumentChange documentChange : value.getDocumentChanges()) {
                 if (documentChange.getType() == DocumentChange.Type.ADDED) {
 
                     HighTechEvent event = new HighTechEvent();
+                    /* Recuperer le tableau des id
+                        faire une boucle pour verifier qu'on est dans la liste des invités
+                        si on est dedans on ajoute l'événement
+                        sinon on passe à l'événement suivant
+                        pour recup: preferenceManager.getString(Constants.KEY_USER_ID);
+                    * */
                     event.name_event = documentChange.getDocument().getString(Constants.KEY_EVENT_NAME);
                     event.date = documentChange.getDocument().getString(Constants.KEY_EVENT_DATE);
                     event.hour = documentChange.getDocument().getString(Constants.KEY_EVENT_HOUR);
@@ -106,12 +116,14 @@ public class Private extends Fragment  {
                     myEvents.add(event);
                 }
             }
-            if (myEvents.size() == 0)
+            if (count == 0)
             {
                 adapter.notifyDataSetChanged();
             }
             else
             {
+                adapter.notifyDataSetChanged();
+
                 //adapter.notifyItemRangeInserted(chatMessages.size(), chatMessages.size());
                 //binding.chatRecyclerView.smoothScrollToPosition(chatMessages.size() - 1);
             }
