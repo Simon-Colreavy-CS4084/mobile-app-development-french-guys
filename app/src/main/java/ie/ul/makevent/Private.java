@@ -54,9 +54,10 @@ public class Private extends Fragment  {
 
 
         // Get list view
+        listenEvent();
         ListView eventsListView = view.findViewById(R.id.events_list_view);
         eventsListView.setAdapter(new HighTechEventAdapter(getContext(),myEvents));
-        listenEvent();
+
 
         return view;
     }
