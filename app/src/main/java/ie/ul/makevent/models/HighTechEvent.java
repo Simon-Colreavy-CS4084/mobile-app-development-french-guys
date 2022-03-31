@@ -2,30 +2,21 @@ package ie.ul.makevent.models;
 
 public class HighTechEvent {
     //field
-     private String name_event;
-     private String date;
-     private String hour;
-     private String location;
-     private String theme;
-     private int nb_participant;
+     public String name_event;
+     public String date;
+     public String hour;
+     public String location;
+     public String theme;
+     public int nb_participant;
 
      //constructor
-    public HighTechEvent(String name_event, String date, String hour, String location, String theme, int nb_participant){
-        this.name_event = name_event;
-        this.date = date;
-        this.hour = hour;
-        this.location = location;
-        this.theme = theme;
-        this.nb_participant = nb_participant;
+    public HighTechEvent(){
+        name_event = "";
+        date = "" ;
+        hour = "";
+        location = "";
+        theme = "";
+        nb_participant = 0;
     }
-
-    //methods
-
-    public String getName_event() {return name_event;}
-    public String getDate() {return date;}
-    public String getHour() {return hour;}
-    public String getLocation() {return location;}
-    public String getTheme() {return theme;}
-    public int getNb_participant() {return nb_participant;}
 
 }

@@ -22,5 +22,14 @@ public class Constants {
     public static final String KEY_SENDER_IMAGE = "senderImage";
     public static final String KEY_RECEIVER_IMAGE = "receiverImage";
     public static final String KEY_LAST_MESSAGE = "lastMessage";
-    public static  final String KEY_AVAILABILITY = "availability";
+    public static final String KEY_AVAILABILITY = "availability";
+
+    //Events
+    public static final String KEY_COLLECTION_EVENT = "events";
+    public static final String KEY_EVENT_NAME = "eventName";
+    public static final String KEY_EVENT_DATE = "date";
+    public static final String KEY_EVENT_HOUR = "hour";
+    public static final String KEY_EVENT_LOCATION = "location";
+    public static final String KEY_EVENT_THEME = "theme";
+    public static final String KEY_EVENT_NB_PARTICIPANT = "nbParticipant";
 }

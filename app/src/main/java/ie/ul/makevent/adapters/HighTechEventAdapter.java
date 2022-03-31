@@ -46,12 +46,12 @@ public class HighTechEventAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflater.inflate(R.layout.adapter_event, null);
         HighTechEvent currentEvent = getItem(i);
-        String event_name = currentEvent.getName_event();
-        String date = currentEvent.getDate();
-        String hour = currentEvent.getHour();
-        String location = currentEvent.getLocation();
-        String theme = currentEvent.getTheme();
-        int nb_participant = currentEvent.getNb_participant();
+        String event_name = currentEvent.name_event;
+        String date = currentEvent.date;
+        String hour = currentEvent.hour;
+        String location = currentEvent.location;
+        String theme = currentEvent.theme;
+        int nb_participant = currentEvent.nb_participant;
 
         //get event name view
         TextView eventNameView = view.findViewById(R.id.item_name);
