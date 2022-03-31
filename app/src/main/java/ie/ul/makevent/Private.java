@@ -99,7 +99,7 @@ public class Private extends Fragment  {
                     event.hour = documentChange.getDocument().getString(Constants.KEY_EVENT_HOUR);
                     event.location = documentChange.getDocument().getString(Constants.KEY_EVENT_LOCATION);
                     event.theme = documentChange.getDocument().getString(Constants.KEY_EVENT_THEME);
-                    event.nb_participant = Integer.parseInt(documentChange.getDocument().getString(Constants.KEY_EVENT_NB_PARTICIPANT));
+                    event.nb_participant = documentChange.getDocument().getString(Constants.KEY_EVENT_NB_PARTICIPANT);
 
                     myEvents.add(event);
                 }

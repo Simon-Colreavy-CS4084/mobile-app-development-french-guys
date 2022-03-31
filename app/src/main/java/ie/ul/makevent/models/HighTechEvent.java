@@ -7,7 +7,7 @@ public class HighTechEvent {
      public String hour;
      public String location;
      public String theme;
-     public int nb_participant;
+     public String nb_participant;
 
      //constructor
     public HighTechEvent(){
@@ -16,7 +16,7 @@ public class HighTechEvent {
         hour = "";
         location = "";
         theme = "";
-        nb_participant = 0;
+        nb_participant = "";
     }
 
 }

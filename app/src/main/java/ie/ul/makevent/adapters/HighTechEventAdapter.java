@@ -51,7 +51,7 @@ public class HighTechEventAdapter extends BaseAdapter {
         String hour = currentEvent.hour;
         String location = currentEvent.location;
         String theme = currentEvent.theme;
-        int nb_participant = currentEvent.nb_participant;
+        String nb_participant = currentEvent.nb_participant;
 
         //get event name view
         TextView eventNameView = view.findViewById(R.id.item_name);
