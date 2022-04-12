@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,20 +101,23 @@ public class Private extends Fragment  {
                 if (documentChange.getType() == DocumentChange.Type.ADDED) {
 
                     HighTechEvent event = new HighTechEvent();
-                    /* Recuperer le tableau des id
-                        faire une boucle pour verifier qu'on est dans la liste des invités
-                        si on est dedans on ajoute l'événement
-                        sinon on passe à l'événement suivant
-                        pour recup: preferenceManager.getString(Constants.KEY_USER_ID);
-                    * */
-                    event.name_event = documentChange.getDocument().getString(Constants.KEY_EVENT_NAME);
-                    event.date = documentChange.getDocument().getString(Constants.KEY_EVENT_DATE);
-                    event.hour = documentChange.getDocument().getString(Constants.KEY_EVENT_HOUR);
-                    event.location = documentChange.getDocument().getString(Constants.KEY_EVENT_LOCATION);
-                    event.theme = documentChange.getDocument().getString(Constants.KEY_EVENT_THEME);
-                    event.nb_participant = documentChange.getDocument().getString(Constants.KEY_EVENT_NB_PARTICIPANT);
 
-                    myEvents.add(event);
+                    event.participants = (ArrayList<String>) documentChange.getDocument().get(Constants.KEY_EVENT_PARTICIPANT);
+
+                    if (event.participants == null)
+                    {
+                        continue;
+                    }
+                    if (event.participants.contains(preferenceManager.getString(Constants.KEY_USER_ID)))
+                    {
+                        event.name_event = documentChange.getDocument().getString(Constants.KEY_EVENT_NAME);
+                        event.date = documentChange.getDocument().getString(Constants.KEY_EVENT_DATE);
+                        event.hour = documentChange.getDocument().getString(Constants.KEY_EVENT_HOUR);
+                        event.location = documentChange.getDocument().getString(Constants.KEY_EVENT_LOCATION);
+                        event.theme = documentChange.getDocument().getString(Constants.KEY_EVENT_THEME);
+                        event.nb_participant = documentChange.getDocument().getString(Constants.KEY_EVENT_NB_PARTICIPANT);
+                        myEvents.add(event);
+                    }
                 }
             }
             if (count == 0)

@@ -32,4 +32,5 @@ public class Constants {
     public static final String KEY_EVENT_LOCATION = "location";
     public static final String KEY_EVENT_THEME = "theme";
     public static final String KEY_EVENT_NB_PARTICIPANT = "nbParticipant";
+    public static final String KEY_EVENT_PARTICIPANT = "participants";
 }

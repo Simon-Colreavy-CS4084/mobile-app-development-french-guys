@@ -13,19 +13,23 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.prefs.PreferenceChangeEvent;
 
 import ie.ul.makevent.R;
 import ie.ul.makevent.databinding.ActivityAddEventBinding;
 import ie.ul.makevent.models.ChatMessage;
 import ie.ul.makevent.models.HighTechEvent;
 import ie.ul.makevent.utilities.Constants;
+import ie.ul.makevent.utilities.PreferenceManager;
 
 public class AddEventActivity extends AppCompatActivity {
 
     private ActivityAddEventBinding binding;
     private FirebaseFirestore database;
+    private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class AddEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_event);
         binding = ActivityAddEventBinding.inflate(getLayoutInflater());
         database = FirebaseFirestore.getInstance();
+        preferenceManager = new PreferenceManager(getApplicationContext());
+
         //setListener();
     }
 
@@ -44,6 +50,9 @@ public class AddEventActivity extends AppCompatActivity {
         String edt_theme = ((EditText) findViewById(R.id.input_event_theme)).getText().toString();
         String edt_nb_participant = ((EditText) findViewById(R.id.input_event_nbParticipant)).getText().toString();
 
+        ArrayList<String> participants = new ArrayList<>();
+        participants.add(preferenceManager.getString(Constants.KEY_USER_ID));
+
         HashMap<String, Object> event = new HashMap<>();
         event.put(Constants.KEY_EVENT_NAME, edt_name);
         event.put(Constants.KEY_EVENT_DATE, edt_date);
@@ -51,7 +60,7 @@ public class AddEventActivity extends AppCompatActivity {
         event.put(Constants.KEY_EVENT_LOCATION, edt_location);
         event.put(Constants.KEY_EVENT_THEME, edt_theme);
         event.put(Constants.KEY_EVENT_NB_PARTICIPANT, edt_nb_participant);
-        // rajouter son id dans la liste des partcipants
+        event.put(Constants.KEY_EVENT_PARTICIPANT, participants);
 
 
         binding.getRoot();
