@@ -1,27 +1,19 @@
 package ie.ul.makevent.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.prefs.PreferenceChangeEvent;
 
 import ie.ul.makevent.R;
 import ie.ul.makevent.databinding.ActivityAddEventBinding;
-import ie.ul.makevent.models.ChatMessage;
-import ie.ul.makevent.models.HighTechEvent;
 import ie.ul.makevent.utilities.Constants;
 import ie.ul.makevent.utilities.PreferenceManager;
 
