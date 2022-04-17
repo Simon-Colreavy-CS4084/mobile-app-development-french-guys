@@ -23,10 +23,7 @@ public class Constants
     public static final String KEY_SENDER_IMAGE = "senderImage";
     public static final String KEY_RECEIVER_IMAGE = "receiverImage";
     public static final String KEY_LAST_MESSAGE = "lastMessage";
-<<<<<<< Updated upstream
     public static  final String KEY_AVAILABILITY = "availability";
-=======
-    public static final String KEY_AVAILABILITY = "availability";
     public static final String KEY_DESCRIPTION = "description" ;
 
     //Events
@@ -38,5 +35,4 @@ public class Constants
     public static final String KEY_EVENT_THEME = "theme";
     public static final String KEY_EVENT_NB_PARTICIPANT = "nbParticipant";
     public static final String KEY_EVENT_PARTICIPANT = "participants";
->>>>>>> Stashed changes
 }
