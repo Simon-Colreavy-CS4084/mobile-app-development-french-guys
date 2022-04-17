@@ -7,6 +7,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -77,20 +78,25 @@ public class Private extends Fragment  {
         startActivity(intent);
     }
 
-    public void setListener(){
+    public void setListener()
+    {
         view.findViewById(R.id.button_addEvent).setOnClickListener(v -> startAddEvent());
 
         ListView listView = view.findViewById(R.id.events_list_view);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                TextView idText = view.findViewById(R.id.idEventText);
+                String code = idText.getText().toString();
+                String subCode = code.substring(6);
 
-                String code = ((TextView) view.findViewById(R.id.idEventText)).getText().toString();
-                if (code != "")
+                if (idText.getVisibility() == View.VISIBLE)
                 {
                     ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("event code", code);
+                    ClipData clip = ClipData.newPlainText("event code", subCode);
                     clipboard.setPrimaryClip(clip);
                 }
             }
@@ -132,10 +138,8 @@ public class Private extends Fragment  {
                     }
                     if (event.participants.contains(preferenceManager.getString(Constants.KEY_USER_ID)))
                     {
-                        if (event.participants.get(0).equals(preferenceManager.getString(Constants.KEY_USER_ID)))
-                        {
-                            event.idEvent = documentChange.getDocument().getId();
-                        }
+                        event.idEvent = documentChange.getDocument().getId();
+
                         event.name_event = documentChange.getDocument().getString(Constants.KEY_EVENT_NAME);
                         event.date = documentChange.getDocument().getString(Constants.KEY_EVENT_DATE);
                         event.hour = documentChange.getDocument().getString(Constants.KEY_EVENT_HOUR);

@@ -12,6 +12,8 @@ import java.util.List;
 
 import ie.ul.makevent.R;
 import ie.ul.makevent.models.HighTechEvent;
+import ie.ul.makevent.utilities.Constants;
+import ie.ul.makevent.utilities.PreferenceManager;
 
 public class HighTechEventAdapter extends BaseAdapter {
 
@@ -19,12 +21,14 @@ public class HighTechEventAdapter extends BaseAdapter {
      private Context context;
      private List<HighTechEvent> highTechEventList;
      private LayoutInflater inflater;
+     private PreferenceManager preferenceManager;
 
      //constructor
     public HighTechEventAdapter(Context context, List<HighTechEvent> highTechEventList){
         this.context = context;
         this.highTechEventList = highTechEventList;
         this.inflater = LayoutInflater.from(context);
+        preferenceManager = new PreferenceManager(context);
     }
 
     @Override
@@ -81,13 +85,15 @@ public class HighTechEventAdapter extends BaseAdapter {
 
         //get event id
         TextView eventIdView = view.findViewById(R.id.idEventText);
-        if (eventId != "")
+        eventIdView.setText("code : " + eventId);
+
+        if (preferenceManager.getString(Constants.KEY_USER_ID).equals(currentEvent.participants.get(0)))
         {
-            eventIdView.setText("code : " + eventId);
+            eventIdView.setVisibility(View.VISIBLE);
         }
         else
         {
-            eventIdView.setText("");
+            eventIdView.setVisibility(View.GONE);
         }
 
 
