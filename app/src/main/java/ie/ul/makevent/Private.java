@@ -1,7 +1,10 @@
 package ie.ul.makevent;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,13 +13,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,9 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ie.ul.makevent.activities.AddEventActivity;
-import ie.ul.makevent.activities.ChatActivity;
 import ie.ul.makevent.adapters.HighTechEventAdapter;
-import ie.ul.makevent.models.ChatMessage;
 import ie.ul.makevent.models.HighTechEvent;
 import ie.ul.makevent.utilities.Constants;
 import ie.ul.makevent.utilities.PreferenceManager;
@@ -75,7 +79,24 @@ public class Private extends Fragment  {
 
     public void setListener(){
         view.findViewById(R.id.button_addEvent).setOnClickListener(v -> startAddEvent());
+
+        ListView listView = view.findViewById(R.id.events_list_view);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String code = ((TextView) view.findViewById(R.id.idEventText)).getText().toString();
+                if (code != "")
+                {
+                    ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("event code", code);
+                    clipboard.setPrimaryClip(clip);
+                }
+            }
+        });
     }
+
 
     public void startAddEvent() {
         Intent intent = new Intent(getContext(), AddEventActivity.class);
@@ -104,18 +125,24 @@ public class Private extends Fragment  {
 
                     event.participants = (ArrayList<String>) documentChange.getDocument().get(Constants.KEY_EVENT_PARTICIPANT);
 
+
                     if (event.participants == null)
                     {
                         continue;
                     }
                     if (event.participants.contains(preferenceManager.getString(Constants.KEY_USER_ID)))
                     {
+                        if (event.participants.get(0).equals(preferenceManager.getString(Constants.KEY_USER_ID)))
+                        {
+                            event.idEvent = documentChange.getDocument().getId();
+                        }
                         event.name_event = documentChange.getDocument().getString(Constants.KEY_EVENT_NAME);
                         event.date = documentChange.getDocument().getString(Constants.KEY_EVENT_DATE);
                         event.hour = documentChange.getDocument().getString(Constants.KEY_EVENT_HOUR);
                         event.location = documentChange.getDocument().getString(Constants.KEY_EVENT_LOCATION);
                         event.theme = documentChange.getDocument().getString(Constants.KEY_EVENT_THEME);
                         event.nb_participant = documentChange.getDocument().getString(Constants.KEY_EVENT_NB_PARTICIPANT);
+
                         myEvents.add(event);
                     }
                 }
@@ -133,4 +160,6 @@ public class Private extends Fragment  {
             }
         }
     };
+
+
 }

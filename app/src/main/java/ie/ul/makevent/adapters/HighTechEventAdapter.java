@@ -52,6 +52,7 @@ public class HighTechEventAdapter extends BaseAdapter {
         String location = currentEvent.location;
         String theme = currentEvent.theme;
         String nb_participant = currentEvent.nb_participant;
+        String eventId = currentEvent.idEvent;
 
         //get event name view
         TextView eventNameView = view.findViewById(R.id.item_name);
@@ -76,6 +77,19 @@ public class HighTechEventAdapter extends BaseAdapter {
         //get event nb participant
         TextView eventNbPView = view.findViewById(R.id.item_nb_participant);
         eventNbPView.setText("Number of participant : " + nb_participant);
+
+
+        //get event id
+        TextView eventIdView = view.findViewById(R.id.idEventText);
+        if (eventId != "")
+        {
+            eventIdView.setText("code : " + eventId);
+        }
+        else
+        {
+            eventIdView.setText("");
+        }
+
 
 
         return view;

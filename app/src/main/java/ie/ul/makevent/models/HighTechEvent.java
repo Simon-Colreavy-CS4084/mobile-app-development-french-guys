@@ -10,6 +10,7 @@ public class HighTechEvent {
      public String location;
      public String theme;
      public String nb_participant;
+     public String idEvent;
      public ArrayList<String> participants;
 
      //constructor
@@ -20,6 +21,7 @@ public class HighTechEvent {
         location = "";
         theme = "";
         nb_participant = "";
+        idEvent = "";
         participants = new ArrayList<>();
     }
 

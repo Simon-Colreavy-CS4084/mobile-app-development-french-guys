@@ -55,6 +55,7 @@ public class AddEventActivity extends AppCompatActivity {
         event.put(Constants.KEY_EVENT_PARTICIPANT, participants);
 
 
+
         binding.getRoot();
         database.collection(Constants.KEY_COLLECTION_EVENT)
                 .add(event)
