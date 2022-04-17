@@ -47,6 +47,7 @@ public class HighTechEventAdapter extends BaseAdapter {
     }
 
     @Override
+
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflater.inflate(R.layout.adapter_event, null);
         HighTechEvent currentEvent = getItem(i);
