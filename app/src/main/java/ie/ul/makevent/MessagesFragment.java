@@ -81,7 +81,6 @@ public class MessagesFragment extends Fragment implements ConversionListener {
 
     private void setListeners()
     {
-        view.findViewById(R.id.imageSignOut).setOnClickListener(v -> signOut());
         view.findViewById(R.id.fabNewChat).setOnClickListener(v ->
                 startActivity(new Intent(getContext(), UsersActivity.class)));
     }

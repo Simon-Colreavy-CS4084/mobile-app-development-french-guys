@@ -72,7 +72,7 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
             binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
             binding.textName.setText(chatMessage.conversionName);
             String lastMessage;
-            if (chatMessage.conversionId.equals(preferenceManager.getString(Constants.KEY_USER_ID)))
+            if (chatMessage.senderId.equals(preferenceManager.getString(Constants.KEY_USER_ID)))
             {
                 lastMessage = "You";
             }
