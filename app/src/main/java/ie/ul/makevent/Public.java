@@ -1,5 +1,6 @@
 package ie.ul.makevent;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,7 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -31,17 +35,24 @@ import ie.ul.makevent.utilities.PreferenceManager;
 
 public class Public extends AppCompatActivity {
 
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private EditText pop_up;
+
     private ActivityPublicBinding binding;
 
     private FirebaseFirestore database;
     List<HighTechEvent> OtherEvents = new ArrayList<>();
     HighTechEventAdapter adapter;
     private PreferenceManager preferenceManager;
+    private String subCode;
+    private int positionn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        //create();
         super.onCreate(savedInstanceState);
         binding = ActivityPublicBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -58,25 +69,13 @@ public class Public extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                HashMap<String, Object> updates = new HashMap<>();
-                updates.put(Constants.KEY_EVENT_PARTICIPANT,OtherEvents.get(0).participants);
-                DocumentReference reference = database.collection(Constants.KEY_COLLECTION_EVENT).document();
+                create();
 
-                reference
-                        .update(updates)
-                        .addOnSuccessListener(documentReference -> {
-                            showToast("modif success");
+                TextView idText = view.findViewById(R.id.idEventText);
+                String code = idText.getText().toString();
+                subCode = code.substring(7);
 
-                        } )
-                        .addOnFailureListener(documentReference -> {
-                            showToast("modif fail");
-
-                        });
-                Toast.makeText(getApplicationContext(),String.valueOf(OtherEvents.get(0).participants.size()),Toast.LENGTH_SHORT).show();
-                OtherEvents.get(0).participants.add(preferenceManager.getString(Constants.KEY_USER_ID));
-                Toast.makeText(getApplicationContext(),String.valueOf(OtherEvents.get(0).participants.size()),Toast.LENGTH_SHORT).show();
-                adapter.notifyDataSetChanged();
-
+                positionn=position;
                 //listenEvent();
                 //Toast.makeText(getApplicationContext(),String.valueOf(OtherEvents.size()),Toast.LENGTH_SHORT).show();
 
@@ -92,9 +91,59 @@ public class Public extends AppCompatActivity {
         });
 
     }
+    public void create()
+    {
+        dialogBuilder=new AlertDialog.Builder(this);
+        final View contactPopView =getLayoutInflater().inflate(R.layout.popup,null);
+        pop_up=(EditText) contactPopView.findViewById(R.id.pop_up);
+
+
+        dialogBuilder.setView(contactPopView);
+        dialog=dialogBuilder.create();
+        dialog.show();
+
+        Button save = contactPopView.findViewById(R.id.saveButton);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Log.e("zaeza",subCode);
+                //pop_up.clearComposingText();
+                if(pop_up.getText().toString().equals(subCode))
+                {
+                    Log.e("zaeza", pop_up.getText().toString());
+                    OtherEvents.get(positionn).participants.add(preferenceManager.getString(Constants.KEY_USER_ID));
+                    HashMap<String, Object> updates = new HashMap<>();
+                    updates.put(Constants.KEY_EVENT_PARTICIPANT,OtherEvents.get(positionn).participants);
+                    DocumentReference reference = database.collection(Constants.KEY_COLLECTION_EVENT).document(subCode);
+
+                    reference
+                            .update(updates)
+                            .addOnSuccessListener(documentReference -> {
+                                Toast.makeText(getApplicationContext(),("Yes"),Toast.LENGTH_SHORT).show();
+
+                            } )
+                            .addOnFailureListener(documentReference -> {
+                                Toast.makeText(getApplicationContext(),("No"),Toast.LENGTH_SHORT).show();
+
+                            });
+                    pop_up.clearComposingText();
+                    adapter.notifyDataSetChanged();
+                    //Intent intent = new Intent(getApplicationContext(), Private.class);
+                    //startActivity(intent);
+                }
+                else
+                {
+                    pop_up.clearComposingText();
+                    Toast.makeText(getApplicationContext(),("Wrong Password"),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
     private void setListeners()
     {
-        binding.imageBackEvents.setOnClickListener(v -> onBackPressed());
+        Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+        binding.imageBackEvents.setOnClickListener(v -> startActivity(intent));
     }
 
     private void listenEvent() {
@@ -123,6 +172,7 @@ public class Public extends AppCompatActivity {
                     }
                     if (!event.participants.contains(preferenceManager.getString(Constants.KEY_USER_ID)))
                     {
+                        event.idEvent=documentChange.getDocument().getId();
                         event.name_event = documentChange.getDocument().getString(Constants.KEY_EVENT_NAME);
                         event.date = documentChange.getDocument().getString(Constants.KEY_EVENT_DATE);
                         event.hour = documentChange.getDocument().getString(Constants.KEY_EVENT_HOUR);

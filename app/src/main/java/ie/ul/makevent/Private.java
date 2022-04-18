@@ -68,7 +68,7 @@ public class Private extends Fragment  {
     }
 
     private void onClickButton() {
-        Toast.makeText(getContext(),"Ceci",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"Public Events",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), Public.class);
         startActivity(intent);
     }
@@ -80,6 +80,7 @@ public class Private extends Fragment  {
     public void startAddEvent() {
         Intent intent = new Intent(getContext(), AddEventActivity.class);
         startActivity(intent);
+
     }
 
 
