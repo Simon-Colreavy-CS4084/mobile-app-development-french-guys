@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:text="Edit"
-            android:textColor="#FF3a5c"
+            android:textColor="#FFFFFF"
             android:textStyle="italic"
             android:background="@color/white"
             android:layout_weight="0.5"
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:textColor="#FF3a5c"
+            android:textColor="#FFFFFF"
             android:layout_alignParentRight="true"
             android:textStyle="bold"
             android:textSize="15dp"
@@ -97,14 +97,15 @@
             android:textSize="@dimen/_10ssp"/>
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameinput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Heisenberg"
 
-            android:id="@+id/nameinput"
-            android:textSize="20dp"
             android:layout_marginTop="8dp"
+            android:text="Heisenberg"
+            android:textSize="20dp"
             android:textStyle="bold" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -131,7 +132,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="Age"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:textSize="18dp"
@@ -140,10 +141,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Walter"
+            android:text="36"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
-            android:id="@+id/nameinputt"
+            android:id="@+id/ageinput"
             android:textColor="@android:color/darker_gray" />
 
     </LinearLayout>
@@ -236,7 +237,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bonjour"
+            android:text="-Party at Clement's house was incredible !
+                          -In 2 weeks we will run this again with spanish theme this time !"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
             android:id="@+id/descriptioninput"

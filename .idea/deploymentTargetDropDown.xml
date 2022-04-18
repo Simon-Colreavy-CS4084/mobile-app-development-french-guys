@@ -7,12 +7,20 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
+<<<<<<< Updated upstream
             <value value="C:\Users\Alexander\.android\avd\Pixel_3_API_30.avd" />
+=======
+            <value value="C:\Users\Alexander\.android\avd\Pixel_3a_API_30.avd" />
+>>>>>>> Stashed changes
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
+<<<<<<< Updated upstream
     <timeTargetWasSelectedWithDropDown value="2022-04-17T12:27:40.954447200Z" />
+=======
+    <timeTargetWasSelectedWithDropDown value="2022-04-18T14:26:53.476446600Z" />
+>>>>>>> Stashed changes
     <targetsSelectedWithDialog>
       <Target>
         <type value="QUICK_BOOT_TARGET" />

@@ -72,6 +72,7 @@ public class Profile extends Fragment
         ((TextInputEditText) view.findViewById(R.id.descriptioninput)).setText(preferenceManager.getString(Constants.KEY_DESCRIPTION));
         ((TextInputEditText) view.findViewById(R.id.nameinput)).setText(preferenceManager.getString(Constants.KEY_NAME));
         ((TextInputEditText) view.findViewById(R.id.emailinput)).setText(preferenceManager.getString(Constants.KEY_EMAIL));
+        ((TextInputEditText) view.findViewById(R.id.ageinput)).setText(preferenceManager.getString(Constants.KEY_AGE));
 
         byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -113,9 +114,7 @@ public class Profile extends Fragment
 
     private void editProfile()
     {
-        Log.e("profile" ," bjr" ) ;
-        showToast("bloc");
-        Log.e("profile", "apres");
+
         String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
         //String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
         //String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
@@ -142,14 +141,12 @@ public class Profile extends Fragment
         });
         editProfilee();
         editProfileee();
-        //editProfileeee();
+        editProfileeeee();
     }
 
     private void editProfilee()
     {
-        Log.e("profile" ," bjr" ) ;
-        showToast("bloc");
-        Log.e("profile", "apres");
+
         // String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
         String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
         //String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
@@ -176,9 +173,7 @@ public class Profile extends Fragment
 
     private void editProfileee()
     {
-        Log.e("profile" ," bjr" ) ;
-        showToast("bloc");
-        Log.e("profile", "apres");
+
          //String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
         //String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
         String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
@@ -205,9 +200,7 @@ public class Profile extends Fragment
 
     private void editProfileeee()
     {
-        Log.e("profile" ," bjr" ) ;
-        showToast("bloc");
-        Log.e("profile", "apres");
+
         //String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
         //String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
         //String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
@@ -234,6 +227,35 @@ public class Profile extends Fragment
                     showToast("modif fail");
                 });
     }
+
+    private void editProfileeeee()
+    {
+
+        //String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
+        //String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
+        //String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
+        String modifage = ((TextInputEditText)view.findViewById(R.id.ageinput)).getText().toString() ;
+
+        HashMap<String, Object> updates = new HashMap<>();
+        preferenceManager.putString(Constants.KEY_AGE, modifage);
+
+        //updates.put(Constants.KEY_NAME, modifname);
+        //updates.put(Constants.KEY_DESCRIPTION , modifdescription) ;
+        updates.put(Constants.KEY_AGE , modifage) ;
+
+        DocumentReference reference = database.collection(Constants.KEY_COLLECTION_USERS).document(preferenceManager.getString(Constants.KEY_USER_ID));
+
+        reference
+                .update(updates)
+                .addOnSuccessListener(documentReference -> {
+                    showToast("profil edited");
+
+                } )
+                .addOnFailureListener(documentReference -> {
+                    showToast("edit faled");
+                });
+    }
+
 
 
 
