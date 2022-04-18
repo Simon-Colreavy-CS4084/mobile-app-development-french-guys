@@ -81,7 +81,7 @@ public class ChatActivity extends BaseActivity {
         if (conversionId != null)
         {
             updateConversion(binding.inputMessage.getText().toString());
-            Log.e("sendMessages", "update conversation");
+            Log.e("sendMessages", "update conversation" );
         }
         else
         {
