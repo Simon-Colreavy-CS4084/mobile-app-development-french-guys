@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         vpAdapter.addFragment(new MessagesFragment(), "Messages");
         vpAdapter.addFragment(new Private(), "Events");
-        vpAdapter.addFragment(new Parametres(), "Parametres");
+        //vpAdapter.addFragment(new Parametres(), "Parametres");
 
         Messages mes = new Messages();
         viewPager.setAdapter(vpAdapter);
