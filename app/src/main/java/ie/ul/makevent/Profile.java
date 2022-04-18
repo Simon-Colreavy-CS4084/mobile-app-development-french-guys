@@ -73,9 +73,10 @@ public class Profile extends Fragment
         ((TextInputEditText) view.findViewById(R.id.nameinput)).setText(preferenceManager.getString(Constants.KEY_NAME));
         ((TextInputEditText) view.findViewById(R.id.emailinput)).setText(preferenceManager.getString(Constants.KEY_EMAIL));
 
-        //byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
-        //Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        //((RoundedImageView) view.findViewById(R.id.imageProfile)).setImageBitmap(bitmap);
+        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+        ((RoundedImageView) view.findViewById(R.id.imageProfile)).setImageBitmap(bitmap);
 
         setListeners();
         database = FirebaseFirestore.getInstance() ;
