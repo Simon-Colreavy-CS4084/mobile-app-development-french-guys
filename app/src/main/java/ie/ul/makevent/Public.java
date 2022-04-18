@@ -65,11 +65,11 @@ public class Public extends AppCompatActivity {
                 reference
                         .update(updates)
                         .addOnSuccessListener(documentReference -> {
-                            showToast("modif success");
+                            //showToast("modif success");
 
                         } )
                         .addOnFailureListener(documentReference -> {
-                            showToast("modif fail");
+                            //showToast("modif fail");
 
                         });
                 Toast.makeText(getApplicationContext(),String.valueOf(OtherEvents.get(0).participants.size()),Toast.LENGTH_SHORT).show();
