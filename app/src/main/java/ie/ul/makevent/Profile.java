@@ -116,8 +116,7 @@ public class Profile extends Fragment
     {
 
         String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
-        //String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
-        //String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
+       
         HashMap<String, Object> updates = new HashMap<>();
         preferenceManager.putString(Constants.KEY_NAME, modifname);
         //preferenceManager.putString(Constants.KEY_DESCRIPTION, modifdescription);
@@ -147,9 +146,9 @@ public class Profile extends Fragment
     private void editProfilee()
     {
 
-        // String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
+
         String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
-        //String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
+
         HashMap<String, Object> updates = new HashMap<>();
         preferenceManager.putString(Constants.KEY_NAME, modifdescription);
 
