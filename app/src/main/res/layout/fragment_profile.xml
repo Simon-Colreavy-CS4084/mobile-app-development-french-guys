@@ -70,23 +70,38 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="15dp"
         android:orientation="vertical" >
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:src="@drawable/walterwhite" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="107dp"
+            android:background="@drawable/background_image"
+            android:scaleType="centerCrop"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/textAddImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Edit image"
+            android:textStyle="bold"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/_10ssp"/>
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Heisenberg"
-            
 
+            android:id="@+id/nameinput"
             android:textSize="20dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold" />
@@ -128,7 +143,7 @@
             android:text="Walter"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
-            android:id="@+id/nameinput"
+            android:id="@+id/nameinputt"
             android:textColor="@android:color/darker_gray" />
 
     </LinearLayout>

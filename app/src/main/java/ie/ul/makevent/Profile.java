@@ -1,11 +1,20 @@
 package ie.ul.makevent;
+//import android.content;
+import android.content.ContentResolver;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +31,17 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.EventListener ;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 //import com.google.firebase.firestore.DatabaseReference ;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import ie.ul.makevent.activities.SignInActivity;
+import ie.ul.makevent.activities.SignUpActivity;
 import ie.ul.makevent.databinding.ActivityMainBinding;
 import ie.ul.makevent.utilities.Constants;
 import ie.ul.makevent.utilities.PreferenceManager;
@@ -36,8 +50,10 @@ import ie.ul.makevent.utilities.PreferenceManager;
 
 public class Profile extends Fragment
 {
+    public static final int RESULT_OK = -1;
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager ;
+    private String encodedImage;
 
     private View view ;
     private FirebaseFirestore database ;
@@ -56,6 +72,10 @@ public class Profile extends Fragment
         ((TextInputEditText) view.findViewById(R.id.descriptioninput)).setText(preferenceManager.getString(Constants.KEY_DESCRIPTION));
         ((TextInputEditText) view.findViewById(R.id.nameinput)).setText(preferenceManager.getString(Constants.KEY_NAME));
         ((TextInputEditText) view.findViewById(R.id.emailinput)).setText(preferenceManager.getString(Constants.KEY_EMAIL));
+
+        //byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        //Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        //((RoundedImageView) view.findViewById(R.id.imageProfile)).setImageBitmap(bitmap);
 
         setListeners();
         database = FirebaseFirestore.getInstance() ;
@@ -76,6 +96,10 @@ public class Profile extends Fragment
     private  void setListeners()
     {
         view.findViewById(R.id.logoutbutton).setOnClickListener(v->signOut());
+        view.findViewById(R.id.imageProfile).setOnClickListener(v -> {
+            Intent intent = new Intent (Intent.ACTION_PICK , MediaStore.Images.Media.EXTERNAL_CONTENT_URI) ;
+            pickImage.launch(intent);
+        });
 
     }
 
@@ -117,6 +141,7 @@ public class Profile extends Fragment
         });
         editProfilee();
         editProfileee();
+        //editProfileeee();
     }
 
     private void editProfilee()
@@ -173,17 +198,82 @@ public class Profile extends Fragment
                 } )
                 .addOnFailureListener(documentReference -> {
                     showToast("modif fail");
+                });
+    }
 
+
+    private void editProfileeee()
+    {
+        Log.e("profile" ," bjr" ) ;
+        showToast("bloc");
+        Log.e("profile", "apres");
+        //String modifname = ((TextInputEditText)view.findViewById(R.id.nameinput)).getText().toString() ;
+        //String modifdescription = ((TextInputEditText)view.findViewById(R.id.descriptioninput)).getText().toString() ;
+        //String modifemail = ((TextInputEditText)view.findViewById(R.id.emailinput)).getText().toString() ;
+       // String modifimage = ((RoundedImageView) view.findViewById(R.id.imageProfile)).
+
+        HashMap<String, Object> updates = new HashMap<>();
+        preferenceManager.putString(Constants.KEY_IMAGE, encodedImage);
+
+
+        //updates.put(Constants.KEY_NAME, modifname);
+        //updates.put(Constants.KEY_DESCRIPTION , modifdescription) ;
+        //updates.put(Constants.KEY_EMAIL , modifemail) ;
+        updates.put(Constants.KEY_IMAGE , encodedImage) ;
+
+        DocumentReference reference = database.collection(Constants.KEY_COLLECTION_USERS).document(preferenceManager.getString(Constants.KEY_USER_ID));
+
+        reference
+                .update(updates)
+                .addOnSuccessListener(documentReference -> {
+                    showToast("modif success");
+
+                } )
+                .addOnFailureListener(documentReference -> {
+                    showToast("modif fail");
                 });
     }
 
 
 
+    private String encodeImage(Bitmap bitmap)
+    {
+        int previewWidth = 150;
+        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50 ,byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes , Base64.DEFAULT);
+    }
+
+    private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK)
+                {
+                    if (result.getData() != null)
+                    {
+                        Uri imageUri = result.getData().getData();
+                        try {
+                            InputStream inputStream = getContext().getContentResolver().openInputStream(imageUri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
 
+                            ((RoundedImageView) view.findViewById(R.id.imageProfile)).setImageBitmap(bitmap);
+                            ((TextView) view.findViewById(R.id.textAddImage)).setVisibility(View.GONE);
 
-
-
+                            encodedImage = encodeImage(bitmap);
+                            editProfileeee();
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+    );
 
 
     private void signOut()
@@ -206,4 +296,6 @@ public class Profile extends Fragment
             })
             .addOnFailureListener(e -> showToast("Unable to sign out"));
 }
+
+
 }
