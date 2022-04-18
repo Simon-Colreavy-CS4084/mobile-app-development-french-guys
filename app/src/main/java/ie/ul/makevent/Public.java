@@ -107,11 +107,11 @@ public class Public extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Log.e("zaeza",subCode);
+                Log.e("zaeza","subcode : " + subCode);
                 //pop_up.clearComposingText();
                 if(pop_up.getText().toString().equals(subCode))
                 {
-                    Log.e("zaeza", pop_up.getText().toString());
+                    Log.e("zaeza","input : " + pop_up.getText().toString());
                     OtherEvents.get(positionn).participants.add(preferenceManager.getString(Constants.KEY_USER_ID));
                     HashMap<String, Object> updates = new HashMap<>();
                     updates.put(Constants.KEY_EVENT_PARTICIPANT,OtherEvents.get(positionn).participants);
@@ -121,11 +121,12 @@ public class Public extends AppCompatActivity {
                             .update(updates)
                             .addOnSuccessListener(documentReference -> {
                                 Toast.makeText(getApplicationContext(),("Yes"),Toast.LENGTH_SHORT).show();
+                                Log.e("zaeza", "succes");
 
                             } )
                             .addOnFailureListener(documentReference -> {
                                 Toast.makeText(getApplicationContext(),("No"),Toast.LENGTH_SHORT).show();
-
+                                Log.e("zaeza", "fail");
                             });
                     pop_up.clearComposingText();
                     adapter.notifyDataSetChanged();
@@ -136,6 +137,7 @@ public class Public extends AppCompatActivity {
                 {
                     pop_up.clearComposingText();
                     Toast.makeText(getApplicationContext(),("Wrong Password"),Toast.LENGTH_SHORT).show();
+                    Log.e("zaeza", "wrong password");
                 }
             }
         });
