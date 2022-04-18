@@ -62,8 +62,9 @@ public class VPAdapter extends FragmentStateAdapter {
                 return new Private();
             case 3:
                 return new Parametres();
+            default:
+                return new Private();
         }
-        return null;
     }
 
     @Override
