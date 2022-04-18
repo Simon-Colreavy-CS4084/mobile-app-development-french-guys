@@ -1,6 +1,7 @@
 package ie.ul.makevent.activities;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,7 +9,10 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,6 +51,7 @@ public class ChatActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        database = FirebaseFirestore.getInstance();
         setListeners();
         loadReceiverDetails();
         init();
@@ -63,7 +68,6 @@ public class ChatActivity extends BaseActivity {
                 preferenceManager.getString(Constants.KEY_USER_ID)
         );
         binding.chatRecyclerView.setAdapter(chatAdapter);
-        database = FirebaseFirestore.getInstance();
     }
 
     private void sendMessages()
@@ -156,6 +160,22 @@ public class ChatActivity extends BaseActivity {
     private void loadReceiverDetails()
     {
         receiverUser = (User) getIntent().getSerializableExtra(Constants.KEY_USER);
+
+        DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_USERS).document(receiverUser.id);
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        receiverUser.name = document.getString(Constants.KEY_NAME);
+                        receiverUser.description = document.getString(Constants.KEY_DESCRIPTION);
+                        receiverUser.email = document.getString(Constants.KEY_EMAIL);
+                    }
+                }
+            }
+        });
         binding.textName.setText(receiverUser.name);
     }
 
@@ -163,6 +183,14 @@ public class ChatActivity extends BaseActivity {
     {
         binding.imageBack.setOnClickListener(view -> onBackPressed());
         binding.layoutSend.setOnClickListener(view -> sendMessages());
+        binding.imageInfo.setOnClickListener(view -> onInfoClicked(receiverUser));
+    }
+
+
+    public void onInfoClicked(User user) {
+        Intent intent = new Intent(getApplicationContext(), DisplayProfileActivity.class);
+        intent.putExtra(Constants.KEY_USER, user);
+        startActivity(intent);
     }
 
     private String getReadableDateTime(Date date)

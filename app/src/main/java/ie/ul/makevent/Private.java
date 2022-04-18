@@ -91,7 +91,7 @@ public class Private extends Fragment  {
             {
                 TextView idText = view.findViewById(R.id.idEventText);
                 String code = idText.getText().toString();
-                String subCode = code.substring(6);
+                String subCode = code.substring(7);
 
                 if (idText.getVisibility() == View.VISIBLE)
                 {

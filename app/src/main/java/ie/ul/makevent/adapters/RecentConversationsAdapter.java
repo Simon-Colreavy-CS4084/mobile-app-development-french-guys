@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.util.List;
 
 import ie.ul.makevent.databinding.ItemContainerRecentConversionBinding;
@@ -88,6 +90,8 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
                 user.id = chatMessage.conversionId;
                 user.name = chatMessage.conversionName;
                 user.image = chatMessage.conversionImage;
+                user.email = chatMessage.email;
+                user.description = chatMessage.description;
                 conversionListener.onConversionClicked(user);
             });
         }
