@@ -119,8 +119,7 @@ public class Profile extends Fragment
        
         HashMap<String, Object> updates = new HashMap<>();
         preferenceManager.putString(Constants.KEY_NAME, modifname);
-        //preferenceManager.putString(Constants.KEY_DESCRIPTION, modifdescription);
-        //preferenceManager.putString(Constants.KEY_EMAIL, modifemail);
+        
 
         updates.put(Constants.KEY_NAME, modifname);
         //updates.put(Constants.KEY_DESCRIPTION , modifdescription) ;
