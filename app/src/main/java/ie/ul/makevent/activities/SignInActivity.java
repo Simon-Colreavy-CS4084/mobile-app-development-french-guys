@@ -71,6 +71,7 @@ public class SignInActivity extends AppCompatActivity {
                     preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
                     preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());
                     preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
+                    preferenceManager.putString(Constants.KEY_AGE, documentSnapshot.getString(Constants.KEY_AGE));
                     preferenceManager.putString(Constants.KEY_IMAGE, documentSnapshot.getString(Constants.KEY_IMAGE));
                     preferenceManager.putString(Constants.KEY_DESCRIPTION, documentSnapshot.getString(Constants.KEY_DESCRIPTION));
                     preferenceManager.putString(Constants.KEY_EMAIL, documentSnapshot.getString(Constants.KEY_EMAIL));
