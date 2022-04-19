@@ -130,11 +130,11 @@ public class Profile extends Fragment
         reference
                 .update(updates)
                 .addOnSuccessListener(documentReference -> {
-                    showToast("modif success");
+                    showToast("profil edited");
 
                 } )
         .addOnFailureListener(documentReference -> {
-            showToast("modif fail");
+            showToast("edit failed");
 
         });
         editProfilee();
@@ -160,11 +160,11 @@ public class Profile extends Fragment
         reference
                 .update(updates)
                 .addOnSuccessListener(documentReference -> {
-                    showToast("modif success");
+                    showToast("profil edited");
 
                 } )
                 .addOnFailureListener(documentReference -> {
-                    showToast("modif fail");
+                    showToast("edit failed");
 
                 });
     }
@@ -187,11 +187,11 @@ public class Profile extends Fragment
         reference
                 .update(updates)
                 .addOnSuccessListener(documentReference -> {
-                    showToast("modif success");
+                    showToast("profil edited");
 
                 } )
                 .addOnFailureListener(documentReference -> {
-                    showToast("modif fail");
+                    showToast("edit failed");
                 });
     }
 
@@ -218,11 +218,11 @@ public class Profile extends Fragment
         reference
                 .update(updates)
                 .addOnSuccessListener(documentReference -> {
-                    showToast("modif success");
+                    showToast("profil edited");
 
                 } )
                 .addOnFailureListener(documentReference -> {
-                    showToast("modif fail");
+                    showToast("edit failed");
                 });
     }
 
@@ -250,7 +250,7 @@ public class Profile extends Fragment
 
                 } )
                 .addOnFailureListener(documentReference -> {
-                    showToast("edit faled");
+                    showToast("edit failed");
                 });
     }
 
