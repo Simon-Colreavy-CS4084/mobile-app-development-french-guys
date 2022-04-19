@@ -54,6 +54,9 @@ public class Public extends AppCompatActivity {
     {
         //create();
         super.onCreate(savedInstanceState);
+        //binding = ActivityPublicBinding.inflate(getLayoutInflater());
+        //setContentView(R.layout.activity_public);
+        //binding.imageBackEvents.setOnClickListener(v -> onBackPressed());
         binding = ActivityPublicBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
@@ -132,6 +135,10 @@ public class Public extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                     //Intent intent = new Intent(getApplicationContext(), Private.class);
                     //startActivity(intent);
+                    dialog.hide();
+                    Intent intent = new Intent(getApplicationContext(), Private.class);
+                    startActivity(intent);
+                    //dialog.hide();
                 }
                 else
                 {
